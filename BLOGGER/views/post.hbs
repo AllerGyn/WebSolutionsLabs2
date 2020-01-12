@@ -1,0 +1,20 @@
+<div class="post border rounded-lg p-3">
+  <div class="d-flex justify-content-between">
+    <h1 class="text-primary d-inline-block col-5 p-0">{{blogPost.title}}
+      <a href="/posts/{{blogPost.id}}/edit?allow=true" title="Редактировать пост">
+      
+      {{#if isAuth}}
+      <i class="material-icons">edit</i>
+      {{/if}}
+      </a>
+    </h1>
+    <div class="buttons row w-50 d-flex justify-content-end">
+      {{#if isAuth}}
+      <button class="btn btn-danger w-25 mr-4 d-flex justify-content-center align-items-center remove-post" data-id="{{blogPost.id}}">Удалить пост</button>
+      {{/if}}
+      <a href="/" class="btn btn-primary w-25 mr-4 d-flex justify-content-center align-items-center">Все посты</a>
+    </div>
+  </div>
+  <h2 class="text-secondary mt-4 d-inline-block w-auto">{{blogPost.category}} |</h2><span><small> автор: </small> {{blogPost.userId.name}}</span>
+  <p class="mt-4">{{blogPost.content}}</p>
+</div>

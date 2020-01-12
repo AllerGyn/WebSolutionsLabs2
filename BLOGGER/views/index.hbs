@@ -1,0 +1,29 @@
+<div class="row d-flex justify-content-between">
+  <h2 class="col-3">Посты</h2>
+  <div class="col-9 d-flex justify-content-end">
+    {{#if isAuth}}
+      <a href="/add" class="btn btn-outline-primary col-3 d-inline-flex justify-content-center align-items-center mr-5">Добавить пост</a>
+      <a href="/auth/logout" class="btn btn-outline-primary col-2 d-inline-flex justify-content-center align-items-center">Выйти</a>
+    {{else}}
+      <a href="/auth/login" class="btn btn-outline-primary col-2 d-inline-flex justify-content-center align-items-center">Войти</a>
+    {{/if}}
+    
+  </div>
+  
+</div>
+  
+<div class="row">
+  <table class="table table-hover mt-5 col-12">
+  {{#if blogPosts.length}}
+    {{#each blogPosts}}
+      <tr>
+        <td class="p-0"><a href="/posts/{{id}}" class="d-block w-100 h-100 p-3">{{title}} | <span><small>категория: </small>{{category}}</span> | <span><small>автор: </small> {{userId.name}}</span></a></td>
+      </tr>
+    {{/each}}
+  {{else}}
+    <tr>
+      <td class="p-0"> <p>Пока пусто :( </p></td>
+    </tr>
+  {{/if}}
+</table>
+</div>

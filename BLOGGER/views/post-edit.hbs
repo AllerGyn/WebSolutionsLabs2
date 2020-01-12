@@ -1,0 +1,15 @@
+<div class="w-50 d-block mx-auto">
+<h2>Редактировать {{ blogPost.title}}</h2>
+
+<form class="mt-5" action="/posts/edit" method="POST">
+  <input class="form-control mt-3" name="title" type="text" placeholder="Заголовок" value="{{blogPost.title}}" required>
+  <input class="form-control mt-3" name="category" type="text" placeholder="Категория" value="{{blogPost.category}}" required>
+  <textarea class="form-control mt-3" name="content" rows="5" placeholder="Контент" required>{{blogPost.content}}</textarea>
+  
+  <div class="mt-4">
+    <input type="hidden" name="id" value="{{blogPost.id}}">
+    <button type="submit" class="btn btn-primary d-inline-block w-25">Изменить</button>
+    <a href="/" class="btn btn-danger btn-cancel d-inline-block w-25 ml-2">Отмена</a>
+  </div>
+</form>
+</div>

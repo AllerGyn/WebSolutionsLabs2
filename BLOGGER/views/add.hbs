@@ -1,0 +1,13 @@
+<div class="w-50 d-block mx-auto">
+<h2>Новый пост</h2>
+<form class="mt-5" action="/add" method="POST">
+  <input class="form-control mt-3" name="title" type="text" placeholder="Заголовок" required>
+  <input class="form-control mt-3" name="category" type="text" placeholder="Категория" required>
+  <textarea class="form-control mt-3" name="content" rows="5" placeholder="Контент" required></textarea>
+  
+  <div class="mt-4">
+    <button type="submit" class="btn btn-primary d-inline-block w-25">Добавить</button>
+    <a href="/" class="btn btn-outline-danger btn-cancel d-inline-block w-25 ml-2">Отмена</a>
+  </div>
+</form>
+</div>

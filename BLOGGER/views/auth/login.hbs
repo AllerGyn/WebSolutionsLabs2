@@ -1,0 +1,85 @@
+<div class="container mt-3 position-relative">
+  <a href="/" class="btn btn-outline-info position-absolute goHome">На главную</a>
+  <div class="row col-9 mx-auto d-flex flex-column">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs d-block mx-auto">
+      
+      {{#if loginError}}
+        <li class="nav-item d-inline-block">
+          <a class="nav-link active" data-toggle="tab" href="#login">Войти</a>
+        </li>
+        <li class="nav-item d-inline-block">
+          <a class="nav-link" data-toggle="tab" href="#register">Регистрация</a>
+        </li>
+        {{else if registerError}}
+        <li class="nav-item d-inline-block">
+          <a class="nav-link" data-toggle="tab" href="#login">Войти</a>
+        </li>
+        <li class="nav-item d-inline-block">
+          <a class="nav-link active" data-toggle="tab" href="#register">Регистрация</a>
+        </li>
+        {{else}}
+        <li class="nav-item d-inline-block">
+          <a class="nav-link active" data-toggle="tab" href="#login">Войти</a>
+        </li>
+        <li class="nav-item d-inline-block">
+          <a class="nav-link" data-toggle="tab" href="#register">Регистрация</a>
+        </li>
+      {{/if}}
+
+
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content d-block col-12 mx-auto">
+
+      {{#if loginError}}
+      <div id="login" class="container tab-pane active"><br>
+      {{else if registerError}}
+        <div id="login" class="container tab-pane fade"><br>
+      {{else}}
+      <div id="login" class="container tab-pane active"><br>
+      {{/if}}
+      
+        
+        {{#if loginError}}
+          <p class="alert bg-danger w-75 mx-auto">{{loginError}}</p>
+        {{/if}}
+        
+        <h2 class="text-center">Войти в блог</h2>
+
+        <form class="mt-5" action="/auth/login" method="POST">
+
+          <input class="form-control mt-3 w-75 mx-auto" name="email" type="email" placeholder="Email" required>
+          <input class="form-control mt-3 w-75 mx-auto" name="password" type="password" placeholder="Пароль" required>
+          <button type="submit" class="btn btn-primary d-block w-75 mx-auto mt-4 btn-lg">Войти</button>
+        </form>
+        
+      </div>
+
+      {{#if loginError}}
+        <div id="register" class="container tab-pane fade"><br>
+      {{else if registerError}}
+        <div id="register" class="container tab-pane active"><br>
+      {{else}}
+        <div id="register" class="container tab-pane fade"><br>
+      {{/if}}
+
+        {{#if registerError}}
+          <p class="alert bg-danger w-75 mx-auto">{{registerError}}</p>
+        {{/if}}
+
+        <h2 class="text-center">Регистрация в блоге</h2>
+
+        <form class="mt-5" action="/auth/register" method="POST">
+
+          <input class="form-control mt-3 w-75 mx-auto" name="email" type="email" placeholder="Email" required>
+          <input class="form-control mt-3 w-75 mx-auto" name="name" type="text" placeholder="Имя" required>
+          <input class="form-control mt-3 w-75 mx-auto" name="password" type="password" placeholder="Пароль" required>
+          <input class="form-control mt-3 w-75 mx-auto" name="repeat" type="password" placeholder="Повторите пароль" required>
+          
+          <button type="submit" class="btn btn-lg btn-primary d-block w-75 mx-auto mt-4">Зарегистрироваться</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,24 +1,58 @@
 Задания по теме «Веб-сокеты» <https://kodaktor.ru/g/websockets_lab> 
 
 Код программы:
-<pre><code>
+```HTML
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Chat Form</title>
+   <meta charset="utf-8">
+   <style>
+     * {
+       font-family:sans-serif;
+     } 
+     ul {
+       list-style: none;
+     }
+     span {
+       position:fixed; 
+       right:20px; 
+       top:10px;
+       border:double; 
+       padding: 15px; 
+       border-radius:20px;
+     }
+     
+   </style>
+ </head>
+ <body>
+    <h1>Содержимое чата:</h1>
+    <ul></ul>
+    <span>
+      <h2>Введите реплику:</h2>
+      <input id="mess">
+      <button id="btn">Написать!</button>
+      <br><br>
+      <input id="img" type="file" name="photo" accept="image/*,image/jpeg">
+   </span>
+   
+   
+
    <script>{
      const URL = 'ws://3333.kodaktor.ru';
      let socket = new WebSocket(URL);
      
      socket.onopen = () => {
-       let listItem = document.createElement("li");
-       listItem.classList.add("newUser");
-       listItem.textContent = 'Новый пользователь присоеденился к чату';
-       document.querySelector("ul").appendChild(listItem);
+       let listItem = `<li style="font-size: 14px; color: #555; margin: 10px 5px;">Новый пользователь присоеденился к чату</li>`;
+       
+       document.querySelector("ul").insertAdjacentHTML("beforeend", listItem);
        console.log('connected');
      };
   
      socket.onclose = () => {
-       let listItem = document.createElement("li");
-       listItem.classList.add("newUser");
-       listItem.textContent = 'Пользователь покинул чат';
-       document.querySelector("ul").appendChild(listItem);
+       let listItem = `<li style="font-size: 14px; color: #555; margin: 10px 5px;">Пользователь покинул чат</li>`;
+       
+       document.querySelector("ul").insertAdjacentHTML("beforeend", listItem);
        console.log('closed');
      };
      
@@ -30,68 +64,40 @@
      };
     
   
-       document.querySelector("#mess").addEventListener("keydown", event => {
-      if (event.keyCode === 13) {
-        socket.send( document.querySelector("#mess").value  );
-        return;
-      }
-    });
+	document.querySelector("#mess").addEventListener("keydown", event => {
+		if (event.keyCode === 13) {
+        	socket.send( document.querySelector("#mess").value  );
+        	return;
+      	}
+  	});
        
      
-     document.querySelector("#btn").addEventListener("click", e => {
-    socket.send( document.querySelector("#mess").value  );
-     });
+	document.querySelector("#btn").addEventListener("click", e => {
+		socket.send( document.querySelector("#mess").value  );
+	});
      
+	function showFile(e) {
+		let files = e.target.files;
+		let fr = new FileReader();
+      
+		fr.onload = function(e) {
+			let li = `<li><img style="max-width: 200px; height: auto; margin: 10px 0;" src="${ e.target.result }"/></li>`;
+            
+		document.querySelector("ul").insertAdjacentHTML('beforeend', li);
+		document.querySelector('#img').value = '';
+    };
   
-     function showFile(e) {
-    	let files = e.target.files;
-      	let fr = new FileReader();
-      	fr.onload = (function(theFile) {
-        return function(e) {
-          let li = document.createElement('li');
-          li.innerHTML = `<img class="chatImg" src="${e.target.result}" />`;
-          document.querySelector("ul").appendChild(li);
-          
-          };
-      })(files[0]);
-    
-      fr.readAsDataURL(files[0]);
-    }
+    fr.readAsDataURL(files[0]);
+  }  
     
      document.getElementById('img').addEventListener('change', showFile, false);                
 }
 </script>
  </body>
 </html>
-</code></pre>
+```
 
-Код по адресу <https://kodaktor.ru/3333.vm>:
-<pre><code>
-const s = require('ws').Server;
-const clients = [];
-                 
-const base = require('path').dirname(process.argv[1]);
-const { wsend } = require(base + '/quit.json');                 
-                 
-(new s({
-  port: 3333
-}))
- .on('connection', ws => {             
-                 
-   let id = Math.random();
-   clients[id] = ws;
-   ws
-    .on('message', message => {
-      Object.values(clients).forEach(client => client.send(message));
-      if (message === wsend) {
-        process.nextTick(() => {throw new Error('Quitting!');} );
-      }
-   })
-    .on('close', () => {
-      delete clients[id];
-   });
-});
-</code></pre>
+Код сервера находится по адресу <https://kodaktor.ru/3333.vm>:
 
 Результат:
 ![](https://github.com/AllerGyn/WebSolutionsLabs2/blob/master/Images/LabSessionScreen.JPG)

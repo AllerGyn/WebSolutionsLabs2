@@ -102,4 +102,4 @@
 Результат:
 ![](https://github.com/AllerGyn/WebSolutionsLabs2/blob/master/Images/LabSessionScreen.JPG)
 
-Ссылка на форк: <https://kodaktor.ru/ws_7e76c>
+Ссылка на форк: <https://kodaktor.ru/ws_2ed4b>

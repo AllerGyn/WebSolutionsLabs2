@@ -3,7 +3,7 @@
 
 
 Код bot.js:
-<pre><code>{
+```
      // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
@@ -40,9 +40,7 @@ class EchoBot extends ActivityHandler {
 }
 
 module.exports.EchoBot = EchoBot;
-
-
-    }</code></pre>
+```
 
 Ссылка на форк: <https://kodaktor.ru/7b1a1b3>
 
